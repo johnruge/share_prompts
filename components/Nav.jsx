@@ -6,8 +6,10 @@ import { useEffect, useState } from 'react'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 
 const Nav = () => {
+  const isUserLoggedIn = true;
+
   return (
-    <nav className='flex-between w-full mb-20 pt-4'>
+    <nav className='flex-between w-full mb-16 pt-5'>
         <Link href='/' className='gap-2 flex-center'>
             <Image
                 src='assets/images/logo.svg'
@@ -18,6 +20,35 @@ const Nav = () => {
             />
             <p className='logo_text'>PromptGalaxy</p>
         </Link>
+
+        {/* Desktop Navigation */}
+        <div className='sm:flex hidden'>
+          {isUserLoggedIn ? (
+            <div className='flex gap-3 md:gap-5'>
+              <Link href='/create-prompt'
+              className='black_btn'>
+                Create Post
+              </Link>
+              <button type='button'
+              className='outline_btn'
+              onClick={signOut}>
+                Sign Out
+              </button>
+
+              <Link href='/profile'>
+                <Image src='assets/images/logo.svg'
+                alt='Profile Image'
+                width={30}
+                height={30}
+                className='rounded-full'/>
+              </Link>
+            </div>
+          ): (
+            <>
+
+            </>
+          )}
+        </div>
     </nav>
   )
 }
